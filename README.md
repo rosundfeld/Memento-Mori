@@ -1,93 +1,176 @@
-📌 Informações Gerais
-Título do Jogo: Memento Mori
-Versão do Documento: 0.0.1
-Autor: Rodrigo Passos Sundfeld
-Data: 04/04/2026
-🎮 Visão Geral do Projeto
-🧠 High Concept
+<h1 align="center">🕯️ Memento Mori</h1>
+<h3 align="center">Game Design Document (GDD)</h3>
 
-Memento Mori é um jogo 2D de gerenciamento de base com elementos de RTS, ambientado na época das cruzadas, utilizando uma forte temática católica para moldar tanto os personagens jogáveis quanto os inimigos.
+<hr/>
 
-🌍 Game Overview
+<h2>📌 Informações Gerais</h2>
 
+<p><strong>Título do Jogo:</strong> Memento Mori</p>
+<p><strong>Versão do Documento:</strong> 0.0.1</p>
+<p><strong>Autor:</strong> Rodrigo Passos Sundfeld</p>
+<p><strong>Data:</strong> 04/04/2026</p>
+
+<br/>
+
+<h2>🎮 Visão Geral do Projeto</h2>
+
+<h3>🧠 High Concept</h3>
+
+<p>
+Memento Mori é um jogo <strong>2D de gerenciamento de base com elementos de RTS</strong>,
+ambientado na época das cruzadas, utilizando uma forte <strong>temática católica</strong>
+para moldar tanto os personagens jogáveis quanto os inimigos.
+</p>
+
+<br/>
+
+<h2>🌍 Game Overview</h2>
+
+<p>
 Em um multiverso marcado pela Inquisição, a guerra entre os Templários e os chamados pagãos atingiu um ponto crítico.
+</p>
 
+<p>
 Desesperados para vencer, os pagãos fizeram pactos com entidades demoníacas, vendendo suas próprias almas em troca de poder.
+</p>
 
-No entanto, a traição foi inevitável.
+<p><strong>No entanto, a traição foi inevitável.</strong></p>
 
+<p>
 As entidades infernais voltaram-se contra seus aliados, desencadeando a queda da humanidade e mergulhando o mundo em caos e condenação.
+</p>
 
-✝️ Seu Papel
+<br/>
 
-Você assume o papel de um Capelão — o líder espiritual encarregado de guiar os sobreviventes.
+<h3>✝️ Seu Papel</h3>
 
-Sua força não vem apenas de armas ou estratégia, mas da fé da humanidade.
+<p>
+Você assume o papel de um <strong>Capelão</strong> — o líder espiritual encarregado de guiar os sobreviventes.
+</p>
 
-Quanto maior a fé → mais poder divino disponível
-Quanto maior o desespero → mais fraco você se torna
+<p>
+Sua força não vem apenas de armas ou estratégia, mas da <strong>fé da humanidade</strong>.
+</p>
 
-Você precisará:
+<ul>
+  <li>Quanto maior a fé → mais poder divino disponível</li>
+  <li>Quanto maior o desespero → mais fraco você se torna</li>
+</ul>
 
-Vencer batalhas
-Restaurar a esperança
-Inspirar a humanidade a continuar lutando
-🏰 Gameplay
-⚔️ Combate
+<p>Você precisará:</p>
 
-O combate gira em torno de um sistema inspirado em:
+<ul>
+  <li>Vencer batalhas</li>
+  <li>Restaurar a esperança</li>
+  <li>Inspirar a humanidade a continuar lutando</li>
+</ul>
 
-Auto Chess
-Legion TD
-Teamfight Tactics
+<br/>
 
-Com diferenciais importantes:
+<h2>🏰 Gameplay</h2>
 
-Posicionamento estratégico em grid
-Controle ativo durante as batalhas
-Uso de poderes divinos
-Comandos táticos:
-Avançar
-Recuar
-Reposicionar tropas
+<h3>⚔️ Combate</h3>
 
-Referência de controle: estilo Warcraft 3
+<p>
+O combate gira em torno de um sistema inspirado em Auto Chess, Legion TD e Teamfight Tactics.
+</p>
 
-🛡️ Gerenciamento de Base
+<p><strong>Diferenciais:</strong></p>
 
-Você lidera a última resistência da humanidade.
+<ul>
+  <li>Posicionamento estratégico em grid</li>
+  <li>Controle ativo durante as batalhas</li>
+  <li>Uso de poderes divinos</li>
+  <li>Comandos táticos:
+    <ul>
+      <li>Avançar</li>
+      <li>Recuar</li>
+      <li>Reposicionar tropas</li>
+    </ul>
+  </li>
+</ul>
 
-Na sua base será possível:
+<p>Referência de controle: estilo Warcraft 3</p>
 
-Treinar soldados
-Evoluir habilidades
-Desenvolver heróis
-Gerenciar recursos
-Controlar a fé da população
-🎯 Objetivo
-Defender sua vila (Tower Defense)
-Expandir território
-Conquistar pontos estratégicos
-Destruir o núcleo demoníaco no centro do mapa
-🏗️ Estrutura do Jogo
-Sistema	Descrição
-🏠 Base	Gerenciamento 2D estilo This War of Mine
-⚔️ Combate	Visão top-down com grid estratégico
-👥 Unidades	Sistema de colisão para evitar sobreposição
-💠 Progressão	Baseada em fé + upgrades + expansão
-🕊️ Tema Central
+<br/>
 
-A fé é poder — mas também é fragilidade.
+<h3>🛡️ Gerenciamento de Base</h3>
 
-Cada derrota enfraquece sua conexão com o divino.
+<p>
+Você lidera a <strong>última resistência da humanidade</strong>.
+</p>
+
+<p>Na sua base será possível:</p>
+
+<ul>
+  <li>Treinar soldados</li>
+  <li>Evoluir habilidades</li>
+  <li>Desenvolver heróis</li>
+  <li>Gerenciar recursos</li>
+  <li>Controlar a fé da população</li>
+</ul>
+
+<br/>
+
+<h3>🎯 Objetivo</h3>
+
+<ul>
+  <li>Defender sua vila (Tower Defense)</li>
+  <li>Expandir território</li>
+  <li>Conquistar pontos estratégicos</li>
+  <li>Destruir o núcleo demoníaco no centro do mapa</li>
+</ul>
+
+<br/>
+
+<h2>🏗️ Estrutura do Jogo</h2>
+
+<table>
+  <tr>
+    <th>Sistema</th>
+    <th>Descrição</th>
+  </tr>
+  <tr>
+    <td>🏠 Base</td>
+    <td>Gerenciamento 2D estilo This War of Mine</td>
+  </tr>
+  <tr>
+    <td>⚔️ Combate</td>
+    <td>Visão top-down com grid estratégico</td>
+  </tr>
+  <tr>
+    <td>👥 Unidades</td>
+    <td>Sistema de colisão para evitar sobreposição</td>
+  </tr>
+  <tr>
+    <td>💠 Progressão</td>
+    <td>Baseada em fé + upgrades + expansão</td>
+  </tr>
+</table>
+
+<br/>
+
+<h2>🕊️ Tema Central</h2>
+
+<p><em>"A fé é poder — mas também é fragilidade."</em></p>
+
+<p>
+Cada derrota enfraquece sua conexão com o divino.<br/>
 Cada vitória reacende a esperança.
+</p>
 
-📖 GDD Completo
+<br/>
 
-Para acessar o documento completo:
+<h2>📖 GDD Completo</h2>
 
-👉 https://docs.google.com/document/d/1p_7a0Ordfn_z02y50cGfpy6_TeiLP_Xb62Dh8aZGSgY/edit?usp=sharing
+<p>
+<a href="https://docs.google.com/document/d/1p_7a0Ordfn_z02y50cGfpy6_TeiLP_Xb62Dh8aZGSgY/edit?usp=sharing" target="_blank">
+👉 Acessar Documento Completo
+</a>
+</p>
 
-🚧 Status do Projeto
+<br/>
 
-Em desenvolvimento inicial (versão 0.0.1)
+<h2>🚧 Status do Projeto</h2>
+
+<p><strong>Em desenvolvimento inicial (versão 0.0.1)</strong></p>
