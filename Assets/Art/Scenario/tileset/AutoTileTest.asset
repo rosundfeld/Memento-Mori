@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2acaac6c5d45c9b52f770dfd9e6bfb, type: 3}
+  m_Name: AutoTileTest
+  m_EditorClassIdentifier: Unity.2D.Tilemap.Extras.Editor::UnityEngine.Tilemaps.AutoTileTemplate
+  width: 288
+  height: 192
+  maskType: 0
+  sprites:
+  - x: 192
+    y: 184
+    mask: 3
+  - x: 128
+    y: 160
+    mask: 10
+  - x: 160
+    y: 176
+    mask: 5
+  - x: 120
+    y: 144
+    mask: 3
+  - x: 96
+    y: 32
+    mask: 1
+  - x: 56
+    y: 32
+    mask: 3
+  - x: 80
+    y: 32
+    mask: 2
+  - x: 104
+    y: 168
+    mask: 10
+  - x: 136
+    y: 144
+    mask: 3
+  - x: 152
+    y: 176
+    mask: 14
+  - x: 224
+    y: 176
+    mask: 5
+  - x: 88
+    y: 56
+    mask: 3
+  - x: 184
+    y: 184
+    mask: 3
+  - x: 168
+    y: 160
+    mask: 10
+  - x: 168
+    y: 168
+    mask: 10
+  - x: 224
+    y: 152
+    mask: 5
+  - x: 112
+    y: 136
+    mask: 12
+  - x: 136
+    y: 176
+    mask: 12
+  - x: 152
+    y: 136
+    mask: 12
+  - x: 200
+    y: 168
+    mask: 3
+  - x: 120
+    y: 176
+    mask: 12
+  - x: 144
+    y: 144
+    mask: 3
+  - x: 224
+    y: 128
+    mask: 5
+  - x: 48
+    y: 40
+    mask: 5
+  - x: 168
+    y: 152
+    mask: 10
+  - x: 112
+    y: 160
+    mask: 5
+  - x: 176
+    y: 184
+    mask: 3
+  - x: 80
+    y: 16
+    mask: 8
+  - x: 224
+    y: 160
+    mask: 5
+  - x: 88
+    y: 32
+    mask: 2
+  - x: 96
+    y: 56
+    mask: 1
+  - x: 64
+    y: 32
+    mask: 11
+  - x: 152
+    y: 160
+    mask: 10
+  - x: 200
+    y: 128
+    mask: 3
+  - x: 192
+    y: 128
+    mask: 3
+  - x: 136
+    y: 184
+    mask: 3
+  - x: 208
+    y: 184
+    mask: 3
+  - x: 128
+    y: 136
+    mask: 12
+  - x: 88
+    y: 40
+    mask: 12
+  - x: 152
+    y: 184
+    mask: 3
+  - x: 160
+    y: 160
+    mask: 5
+  - x: 176
+    y: 128
+    mask: 3
+  - x: 208
+    y: 128
+    mask: 3
+  - x: 144
+    y: 176
+    mask: 12
+  - x: 168
+    y: 144
+    mask: 10
+  - x: 200
+    y: 152
+    mask: 12
+  - x: 192
+    y: 160
+    mask: 15
+  - x: 216
+    y: 128
+    mask: 3
+  - x: 128
+    y: 176
+    mask: 12
+  - x: 112
+    y: 184
+    mask: 3
+  - x: 104
+    y: 152
+    mask: 10
+  - x: 64
+    y: 40
+    mask: 10
+  - x: 88
+    y: 16
+    mask: 12
+  - x: 120
+    y: 136
+    mask: 12
+  - x: 152
+    y: 144
+    mask: 11
+  - x: 168
+    y: 136
+    mask: 10
+  - x: 104
+    y: 176
+    mask: 10
+  - x: 112
+    y: 152
+    mask: 5
+  - x: 184
+    y: 128
+    mask: 3
+  - x: 152
+    y: 152
+    mask: 10
+  - x: 112
+    y: 168
+    mask: 5
+  - x: 160
+    y: 168
+    mask: 5
+  - x: 168
+    y: 176
+    mask: 10
+  - x: 160
+    y: 144
+    mask: 5
+  - x: 96
+    y: 24
+    mask: 5
+  - x: 144
+    y: 136
+    mask: 12
+  - x: 224
+    y: 136
+    mask: 5
+  - x: 224
+    y: 168
+    mask: 5
+  - x: 136
+    y: 136
+    mask: 12
+  - x: 168
+    y: 128
+    mask: 10
+  - x: 200
+    y: 184
+    mask: 3
+  - x: 200
+    y: 160
+    mask: 15
+  - x: 64
+    y: 48
+    mask: 15
+  - x: 80
+    y: 24
+    mask: 10
+  - x: 96
+    y: 40
+    mask: 4
+  - x: 80
+    y: 48
+    mask: 10
+  - x: 128
+    y: 184
+    mask: 3
+  - x: 120
+    y: 184
+    mask: 3
+  - x: 48
+    y: 48
+    mask: 13
+  - x: 192
+    y: 168
+    mask: 3
+  - x: 128
+    y: 144
+    mask: 3
+  - x: 144
+    y: 184
+    mask: 3
+  - x: 112
+    y: 176
+    mask: 13
+  - x: 112
+    y: 144
+    mask: 7
+  - x: 152
+    y: 168
+    mask: 10
+  - x: 80
+    y: 56
+    mask: 2
+  - x: 160
+    y: 152
+    mask: 5
+  - x: 96
+    y: 48
+    mask: 5
+  - x: 216
+    y: 184
+    mask: 3
+  - x: 136
+    y: 160
+    mask: 5
+  - x: 56
+    y: 48
+    mask: 15
+  - x: 104
+    y: 160
+    mask: 10
+  - x: 96
+    y: 16
+    mask: 4
+  - x: 48
+    y: 32
+    mask: 5
+  - x: 80
+    y: 40
+    mask: 8
+  - x: 224
+    y: 144
+    mask: 5
+  - x: 192
+    y: 152
+    mask: 12
+  - x: 104
+    y: 144
+    mask: 10
