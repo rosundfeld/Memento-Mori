@@ -8,15 +8,15 @@ public class BehaviorTreeDebugger : MonoBehaviour
 
 		foreach (var unit in units)
 		{
-			// Desenha range de visão
-			Gizmos.color = Color.yellow;
-			Gizmos.DrawWireSphere(unit.transform.position, 20f);
+			// Desenha range de visï¿½o
+			// Gizmos.color = Color.yellow;
+			// Gizmos.DrawWireSphere(unit.transform.position, 20f);
 
-			// Desenha range de ataque
-			Gizmos.color = Color.red;
-			Gizmos.DrawWireSphere(unit.transform.position, unit.attackRange);
+			// // Desenha range de ataque
+			// Gizmos.color = Color.red;
+			// Gizmos.DrawWireSphere(unit.transform.position, unit.UnitData.attackRange);
 
-			// Linha até alvo
+			// Linha atï¿½ alvo
 			//if (unit.GetTarget() != null)
 			//{
 			//	Gizmos.color = Color.green;
