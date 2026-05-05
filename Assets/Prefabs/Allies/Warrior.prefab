@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 1710194751686579906}
   - component: {fileID: 4222658277718598109}
   - component: {fileID: 342095923882386457}
+  - component: {fileID: 6453757934413160757}
+  - component: {fileID: 6022929895586722545}
   m_Layer: 0
   m_Name: Warrior
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +140,47 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.625, y: 1.875}
   m_EdgeRadius: 0
+--- !u!114 &6453757934413160757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900476883076459718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 3570325943442997445
+  m_OriginalGraph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 3570325943442997445
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 900476883076459718}
+--- !u!114 &6022929895586722545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900476883076459718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Unit
+  data: {fileID: 11400000, guid: 3f54b71863a9ee54195b05ead2f6f665, type: 2}
+  stats: {fileID: 11400000, guid: 78ce49070ba03064ea05b467ef8cc5c5, type: 2}
+  timeToRetarget: 2

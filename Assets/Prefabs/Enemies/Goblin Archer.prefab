@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6911610924349477103}
   - component: {fileID: 1767725409975678186}
   - component: {fileID: 9189433109843870655}
+  - component: {fileID: 2402970572066191616}
   m_Layer: 0
   m_Name: Goblin Archer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +139,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.125, y: 1.75}
   m_EdgeRadius: 0
+--- !u!114 &2402970572066191616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203800868858289435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Unit
+  data: {fileID: 11400000, guid: 63777e52f1dae7d4cad5ad92490bcee6, type: 2}
+  stats: {fileID: 11400000, guid: e7398520a0f02ee40b4aa4ade17c34c1, type: 2}
+  timeToRetarget: 2

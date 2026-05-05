@@ -1,9 +1,8 @@
 using UnityEngine;
 
-[System.Serializable]
-public class UnitStats : MonoBehaviour
+[CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
+public class UnitStats : ScriptableObject
 {
-    public float health;
     public float maxHealth;
     public float mana;
     public float attackDamage;

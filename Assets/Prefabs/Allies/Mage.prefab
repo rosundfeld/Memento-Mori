@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8202351288693929742}
   - component: {fileID: 1481598258746723760}
   - component: {fileID: 5674713085720123117}
+  - component: {fileID: 8416416287500483285}
   m_Layer: 0
-  m_Name: Wizard
-  m_TagString: Untagged
+  m_Name: Mage
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +139,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.875, y: 2.25}
   m_EdgeRadius: 0
+--- !u!114 &8416416287500483285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261010032117963399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Unit
+  data: {fileID: 11400000, guid: 4fc5151944f04ff4494bfc14794b2310, type: 2}
+  stats: {fileID: 11400000, guid: 073664e18c751dc4883b77d3d9e8a9f1, type: 2}
+  timeToRetarget: 2

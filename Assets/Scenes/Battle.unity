@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000c9d312e0
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -803,9 +803,9 @@ RectTransform:
   m_Father: {fileID: 2090577919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -211.6}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 611}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631386398
 MonoBehaviour:
@@ -820,15 +820,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -18336,45 +18336,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 900476883076459718, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7869562597699726869}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
---- !u!1 &7869562597699726868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 900476883076459718, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
-  m_PrefabInstance: {fileID: 7869562597699726867}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7869562597699726869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7869562597699726868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 3570325943442997445
-  m_OriginalGraph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
-  m_IsInitialised: 0
-  m_IsStarted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 3570325943442997445
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 7869562597699726868}
 --- !u!1001 &8166810759797021472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18383,6 +18346,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1495822511}
     m_Modifications:
+    - target: {fileID: 59685581416380001, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 59685581416380001, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2059965939098071986, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.26
@@ -18422,6 +18393,14 @@ PrefabInstance:
     - target: {fileID: 2059965939098071986, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018136996325225415, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 6018136996325225415, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -535637047
       objectReference: {fileID: 0}
     - target: {fileID: 8957775156403184222, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
       propertyPath: m_Name

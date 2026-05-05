@@ -10,14 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31c76d6b2ae41e049bf84d3de9c8da4a, type: 3}
-  m_Name: Warrior
+  m_Name: GoblinArcher
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
-  UnitPrefab: {fileID: 900476883076459718, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
-  health: 100
-  maxHealth: 100
-  mana: 50
-  attackDamage: 10
-  attackSpeed: 1
-  moveSpeed: 10
-  treat: 10
-  attackRange: 1
+  UnitPrefab: {fileID: 7495871930961605210, guid: ca95b6cf0fdf3014a852453200034d2d, type: 3}
+  baseStats: {fileID: 11400000, guid: e7398520a0f02ee40b4aa4ade17c34c1, type: 2}

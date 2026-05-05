@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8308671835743070975}
   - component: {fileID: 3559955277205712738}
   - component: {fileID: 8792125978688386498}
+  - component: {fileID: 4333847238268773300}
   m_Layer: 0
   m_Name: Goblin Warrior
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,3 +139,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.25, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &4333847238268773300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495871930961605210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Unit
+  data: {fileID: 11400000, guid: 3fbd738c202aa8a4ba79b03fda337db3, type: 2}
+  stats: {fileID: 11400000, guid: 27ec39681652a1441b39895ff1650ac3, type: 2}
+  timeToRetarget: 2

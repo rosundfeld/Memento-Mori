@@ -11,12 +11,11 @@ public partial class SeekEnemyAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Enemy;
 
     private Unit unit;
-    //private Unit self;
+    private GameObject self;
 
     protected override Status OnStart()
     {
-        unit = Unit.Instance;
-        //self = GameObject;
+        self = GameObject;
 
         if (unit == null || Enemy.Value == null)
             return Status.Failure;
@@ -26,7 +25,7 @@ public partial class SeekEnemyAction : Action
             Enemy.Value.transform.position
         );
 
-        if (distance <= unit.stats.attackRange)
+        if (distance <= unit.Stats.attackRange)
             return Status.Success;
 
         return Status.Running;
@@ -42,7 +41,7 @@ public partial class SeekEnemyAction : Action
             Enemy.Value.transform.position
         );
 
-        return distance <= unit.stats.attackRange
+        return distance <= unit.Stats.attackRange
             ? Status.Success
             : Status.Running;
     }
