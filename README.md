@@ -67,9 +67,9 @@ Sua força não vem apenas de armas ou estratégia, mas da <strong>fé da humani
 
 <br/>
 
-<h2>🏰 Gameplay</h2>
+<h2><b>v</b></h2>
 
-<h3>⚔️ Combate</h3>
+<h3><b>Combate</b></h3>
 
 <p>
 O combate gira em torno de um sistema inspirado em Auto Chess, Legion TD e Teamfight Tactics.
@@ -112,7 +112,7 @@ Você lidera a <strong>última resistência da humanidade</strong>.
 
 <br/>
 
-<h3>🎯 Objetivo</h3>
+<h3><b>Objetivo</b></h3>
 
 <ul>
   <li>Defender sua vila (Tower Defense)</li>
