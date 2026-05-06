@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8667001d9b1b0144791b0f2bd518349d, type: 3}
   m_Name: WarriorStats
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  health: 100
   maxHealth: 100
   mana: 50
   attackDamage: 10

@@ -98,42 +98,37 @@ public class Unit : MonoBehaviour
         return aggroTable.ContainsKey(unit);
     }
 
-    public void RetargetEnemy()
+    public float GetAggro(Unit target)
     {
-        if (targeting == null)
-        {
-            Debug.LogWarning($"[Unit] UnitTargeting nao encontrado em {gameObject.name}. Adicione o componente.", gameObject);
-            return;
-        }
-
-        List<Unit> enemies = FindEnemiesInScene();
-        currentTargetEnemy = targeting.FindBestTarget(this, enemies);
+        return aggroTable.TryGetValue(target, out float val) ? val : 0f;
     }
 
-    //------------------Get Units System------------------
-    public List<Unit> FindEnemiesInScene()
-    {
-        string targetTag = gameObject.CompareTag("Player") ? "Enemy" : "Player";
-        List<Unit> enemies = new List<Unit>();
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag(targetTag))
-        {
-            Unit unit = go.GetComponent<Unit>();
-            if (unit != null)
-                enemies.Add(unit);
-        }
-        return enemies;
-    }
+	public void RetargetEnemy()
+	{
+		if (targeting == null)
+		{
+			Debug.LogWarning($"[Unit] UnitTargeting nao encontrado em {gameObject.name}. Adicione o componente.", gameObject);
+			return;
+		}
 
-    public List<Unit> FindAlliesInScene()
-    {
-        string targetTag = gameObject.CompareTag("Player") ? "Player" : "Enemy";
-        List<Unit> allies = new List<Unit>();
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag(targetTag))
-        {
-            Unit unit = go.GetComponent<Unit>();
-            if (unit != null)
-                allies.Add(unit);
-        }
-        return allies;
-    }
+		// Usa UnitManager para obter candidatos; substitua por GetEnemiesInRange(this, Stats.someSight) se quiser filtrar por distância.
+		List<Unit> enemies = UnitManager.Instance != null
+			? UnitManager.Instance.GetEnemies(this)
+			: new List<Unit>();
+
+		currentTargetEnemy = targeting.FindBestTarget(this, enemies);
+	}
+
+	//------------------Get Units System------------------
+	// Mantive removidas as versões locais que usavam FindGameObjectsWithTag:
+	public List<Unit> FindEnemiesInScene()
+	{
+		// Apenas fallback para compatibilidade; recomenda-se usar UnitManager
+		return UnitManager.Instance != null ? UnitManager.Instance.GetEnemies(this) : new List<Unit>();
+	}
+
+	public List<Unit> FindAlliesInScene()
+	{
+		return UnitManager.Instance != null ? UnitManager.Instance.GetAllies(this) : new List<Unit>();
+	}
 }

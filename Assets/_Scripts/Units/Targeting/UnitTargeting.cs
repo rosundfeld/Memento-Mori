@@ -1,53 +1,54 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UnitTargeting : MonoBehaviour
 {
-    public float CalculateScore(Unit self, Unit target)
+    [Header("Pesos do Score")]
+    [SerializeField] private float threatWeight  = 10f;
+    [SerializeField] private float aggroWeight   = 15f;
+    [SerializeField] private float distanceWeight = 2f;
+
+    public float CalculateScore(Unit self, Unit target, float aggroAmount = 0f)
     {
-        float score = 0;
+        if (self == null || target == null) return float.MinValue;
 
-        float distance = Vector3.Distance(self.transform.position, target.transform.position);
+        float distance  = Vector3.Distance(self.transform.position, target.transform.position);
+        float treat     = target.Stats != null ? target.Stats.treat : 0f;
 
-        // 🎯 Prioridade: mais perto = melhor
-        score += 10f / (distance + 0.1f);
-
-        // 🩸 Prioridade: alvo com pouca vida
-        score += (1f - (target.CurrentHealth / target.Stats.maxHealth)) * 5f;
-
-        // 😡 Aggro: quem bateu em mim recentemente
-        if (self.WasRecentlyAttackedBy(target))
-            score += 15f;
+        float score = (treat     * threatWeight)
+                    + (aggroAmount * aggroWeight)
+                    + (1f / (1f + distance) * distanceWeight);
 
         return score;
     }
 
     public Unit FindBestTarget(Unit self, List<Unit> enemies)
     {
-        TargetInfo best = null;
+        if (self == null || enemies == null || enemies.Count == 0) return null;
 
-        foreach (var enemy in enemies)
+        Unit  best      = null;
+        float bestScore = float.MinValue;
+
+        foreach (var e in enemies)
         {
-            if (!IsInRange(self, enemy)) continue;
+            if (e == null || e == self) continue;
 
-            float score = CalculateScore(self, enemy);
+            float aggro = self.GetAggro(e);
+            float score = CalculateScore(self, e, aggro);
 
-            if (best == null || score > best.score)
+            if (score > bestScore)
             {
-                best = new TargetInfo
-                {
-                    unit = enemy,
-                    score = score
-                };
+                bestScore = score;
+                best      = e;
             }
         }
 
-        return best?.unit;
+        return best;
     }
 
     public bool IsInRange(Unit self, Unit target)
     {
-        float distance = Vector3.Distance(self.transform.position, target.transform.position);
-        return distance <= self.Stats.attackRange;
+        if (self == null || target == null || self.Stats == null) return false;
+        return Vector3.Distance(self.transform.position, target.transform.position) <= self.Stats.attackRange;
     }
 }
