@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 5594752591698041470}
   - component: {fileID: 5703319318350990133}
   - component: {fileID: 6550747776357139040}
+  - component: {fileID: 9076189966649988622}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Player
@@ -558,6 +559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
+  healthBarFill: {fileID: 2723173544494873089}
+  manaBarFill: {fileID: 1392337635048098242}
   data: {fileID: 11400000, guid: 2ae34f5f1a7c5844fbcb21b678bf01a2, type: 2}
   stats: {fileID: 11400000, guid: 47df5ee6afb48d943806e13fdb9c0f90, type: 2}
   timeToRetarget: 2
@@ -573,3 +576,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce02761d4ff3c0419cd2f79c03321ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitTargeting
+  threatWeight: 10
+  aggroWeight: 15
+  distanceWeight: 2
+--- !u!114 &9076189966649988622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957775156403184222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 3570325943442997445
+  - rid: 4987122110022811727
+  - rid: 4987122110022811728
+  m_OriginalGraph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 3570325943442997445
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 4987122110022811727
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 14297569688583861930
+          m_Value1: 3203135271383545136
+        Name: Speed
+        m_Value: 5
+    - rid: 4987122110022811728
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 13306589953996707524
+          m_Value1: 3129524187020855575
+        Name: Enemy
+        m_Value: {fileID: 0}

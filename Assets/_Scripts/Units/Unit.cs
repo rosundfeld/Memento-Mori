@@ -1,134 +1,146 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(UnitTargeting))]
 public class Unit : MonoBehaviour
 {
-    [Header("Stats")]
-    [SerializeField]
-    private UnitData data;
-    [SerializeField]
-    private UnitStats stats; // runtime
-    public float CurrentHealth { get; private set; }
-    public UnitStats Stats { get => stats; set => stats = value; }
+	[Header("UI")]
+	public Image healthBarFill;
+	public Image manaBarFill;
 
-    [Header("Targeting")]
-    private float retargetTimer;
-    [SerializeField]
-    private float timeToRetarget = 2f;
-    private Dictionary<Unit, float> aggroTable = new Dictionary<Unit, float>();
+	[Header("Stats")]
+	[SerializeField]
+	private UnitData data;
+	[SerializeField]
+	private UnitStats stats;
+	public float CurrentHealth { get; private set; }
+	public UnitStats Stats { get => stats; set => stats = value; }
 
-    private Unit currentTargetEnemy;
-    
-    
-    private UnitTargeting targeting;
+	[Header("Targeting")]
+	private float retargetTimer;
+	[SerializeField]
+	private float timeToRetarget = 2f;
+	private Dictionary<Unit, float> aggroTable = new Dictionary<Unit, float>();
 
+	public Unit CurrentTargetEnemy { get; private set; }
 
+	private UnitTargeting targeting;
 
-    private void Awake()
-    {
-        Stats = data.baseStats.Clone();
-        CurrentHealth = Stats.maxHealth;
-        targeting = GetComponent<UnitTargeting>();
-        if (targeting == null)
-            targeting = GetComponentInChildren<UnitTargeting>(true);
-    }
+	// Acumulador do cooldown de ataque
+	private float attackTimer = 0f;
 
-    public void TakeDamage(float damage)
-    {
-        CurrentHealth -= damage;
-        if (CurrentHealth <= 0) Die();
-    }
+	private void Awake()
+	{
+		Stats = data.baseStats.Clone();
+		CurrentHealth = Stats.maxHealth;
+		targeting = GetComponent<UnitTargeting>();
 
-    public void Attack(Unit target)
-    {
-        currentTargetEnemy = target;
-    }
+		UnitManager.Instance.Register(this);
+		if (targeting == null)
+			targeting = GetComponentInChildren<UnitTargeting>(true);
+	}
 
-    private void FixedUpdate()
-    {
-        retargetTimer += Time.fixedDeltaTime;
-        if (retargetTimer >= timeToRetarget)
-        {
-            RetargetEnemy();
-            retargetTimer = 0;
-        }
-    }
+	private void FixedUpdate()
+	{
+		retargetTimer += Time.fixedDeltaTime;
+		if (retargetTimer >= timeToRetarget)
+		{
+			RetargetEnemy();
+			retargetTimer = 0;
+		}
 
+		// Tick do cooldown de ataque (sempre acumula, independente do BT)
+		if (attackTimer < Stats.attackSpeed)
+			attackTimer += Time.fixedDeltaTime;
+	}
 
-    private void Update()
-    {
-        if (currentTargetEnemy == null) return;
+	//--------------------------Attack System-----------------
 
-        Stats.attackSpeed += Time.deltaTime;
+	/// <summary>Retorna true se a unidade pode atacar (cooldown pronto).</summary>
+	public bool CanAttack() => attackTimer >= Stats.attackSpeed;
 
-        if (Stats.attackSpeed >= 1f / Stats.attackSpeed)
-        {
-            currentTargetEnemy.TakeDamage(Stats.attackDamage);
-            Stats.attackSpeed = 0;
-        }
-    }
+	/// <summary>Executa o ataque no alvo. Use CanAttack() antes de chamar.</summary>
+	public void PerformAttack(Unit target)
+	{
+		if (target == null) return;
+		target.TakeDamage(Stats.attackDamage, this);
+		attackTimer = 0f;
+	}
 
-    //------------------Action System-----------------
-    public void TakeDamage(float damage, Unit attacker)
-    {
-        CurrentHealth -= damage;
+	/// <summary>Define o alvo atual (usado pelo BT para manter referência).</summary>
+	public void SetTarget(Unit target)
+	{
+		CurrentTargetEnemy = target;
+	}
 
-        RegisterAggro(attacker, damage);
+	//--------------------------Health System-----------------
 
-        if (CurrentHealth <= 0) Die();
-    }
+	public void TakeDamage(float damage)
+	{
+		Debug.Log($"{gameObject.name} took {damage} damage. Current health: {CurrentHealth - damage}/{Stats.maxHealth}");
+		CurrentHealth -= damage;
+		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Stats.maxHealth);
+		healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		if (CurrentHealth <= 0) Die();
+	}
 
-    private void Die()
-    {
-        Destroy(gameObject);
-    }
+	public void Heal(float healAmount)
+	{
+		CurrentHealth += healAmount;
+		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Stats.maxHealth);
+		healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+	}
 
-    //------------------Aggro System------------------
-    public void RegisterAggro(Unit attacker, float amount)
-    {
-        if (!aggroTable.ContainsKey(attacker))
-            aggroTable[attacker] = 0;
+	//------------------Action System-----------------
+	public void TakeDamage(float damage, Unit attacker)
+	{
+		CurrentHealth -= damage;
+		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Stats.maxHealth);
+		healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		RegisterAggro(attacker, damage);
+		if (CurrentHealth <= 0) Die();
+	}
 
-        aggroTable[attacker] += amount;
-    }
+	private void Die()
+	{
+		UnitManager.Instance?.Unregister(this);
+		Destroy(gameObject);
+	}
 
-    public bool WasRecentlyAttackedBy(Unit unit)
-    {
-        return aggroTable.ContainsKey(unit);
-    }
+	//------------------Aggro System------------------
+	public void RegisterAggro(Unit attacker, float amount)
+	{
+		if (!aggroTable.ContainsKey(attacker))
+			aggroTable[attacker] = 0;
+		aggroTable[attacker] += amount;
+	}
 
-    public float GetAggro(Unit target)
-    {
-        return aggroTable.TryGetValue(target, out float val) ? val : 0f;
-    }
+	public bool WasRecentlyAttackedBy(Unit unit) => aggroTable.ContainsKey(unit);
 
+	public float GetAggro(Unit target) =>
+		aggroTable.TryGetValue(target, out float val) ? val : 0f;
+
+	//------------------Retarget System------------------
 	public void RetargetEnemy()
 	{
 		if (targeting == null)
 		{
-			Debug.LogWarning($"[Unit] UnitTargeting nao encontrado em {gameObject.name}. Adicione o componente.", gameObject);
+			Debug.LogWarning($"[Unit] UnitTargeting nao encontrado em {gameObject.name}.", gameObject);
 			return;
 		}
 
-		// Usa UnitManager para obter candidatos; substitua por GetEnemiesInRange(this, Stats.someSight) se quiser filtrar por distância.
 		List<Unit> enemies = UnitManager.Instance != null
-			? UnitManager.Instance.GetEnemies(this)
-			: new List<Unit>();
+	 ? UnitManager.Instance.GetEnemies(this)
+   : new List<Unit>();
 
-		currentTargetEnemy = targeting.FindBestTarget(this, enemies);
+		CurrentTargetEnemy = targeting.FindBestTarget(this, enemies);
 	}
 
 	//------------------Get Units System------------------
-	// Mantive removidas as versões locais que usavam FindGameObjectsWithTag:
-	public List<Unit> FindEnemiesInScene()
-	{
-		// Apenas fallback para compatibilidade; recomenda-se usar UnitManager
-		return UnitManager.Instance != null ? UnitManager.Instance.GetEnemies(this) : new List<Unit>();
-	}
+	public List<Unit> FindEnemiesInScene() =>
+		UnitManager.Instance != null ? UnitManager.Instance.GetEnemies(this) : new List<Unit>();
 
-	public List<Unit> FindAlliesInScene()
-	{
-		return UnitManager.Instance != null ? UnitManager.Instance.GetAllies(this) : new List<Unit>();
-	}
+	public List<Unit> FindAlliesInScene() =>
+		UnitManager.Instance != null ? UnitManager.Instance.GetAllies(this) : new List<Unit>();
 }

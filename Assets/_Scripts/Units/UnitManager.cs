@@ -7,6 +7,21 @@ public class UnitManager : MonoBehaviour
 
 	private readonly HashSet<Unit> units = new HashSet<Unit>();
 
+
+
+	/*
+	Esse cÃ³digo cria automaticamente um UnitManager singleton antes de qualquer coisa no jogo,
+	garantindo que sempre exista um manager central para registrar e consultar unidades.
+	*/
+	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+	private static void AutoInitialize()
+	{
+		if (Instance != null) return;
+		var go = new GameObject("UnitManager");
+		DontDestroyOnLoad(go);
+		Instance = go.AddComponent<UnitManager>();
+	}
+
 	private void Awake()
 	{
 		if (Instance != null && Instance != this)
@@ -30,11 +45,10 @@ public class UnitManager : MonoBehaviour
 			units.Remove(u);
 	}
 
-	// Retorna todas unidades inimigas relativas ao requester (mantive a lógica de tags existente)
+	// Retorna todas unidades inimigas relativas ao requester (mantive a lï¿½gica de tags existente)
 	public List<Unit> GetEnemies(Unit requester)
 	{
 		List<Unit> enemies = new List<Unit>();
-		Debug.Log($"GetEnemies: Found {enemies.Count} enemies for requester {requester.name}");
 		if (requester == null) return enemies;
 
 		string targetTag = requester.gameObject.CompareTag("Player") ? "Enemy" : "Player";
@@ -60,7 +74,7 @@ public class UnitManager : MonoBehaviour
 		return allies;
 	}
 
-	// Consulta por área (opcional e útil para reduzir candidatos)
+	// Consulta por ï¿½rea (opcional e ï¿½til para reduzir candidatos)
 	public List<Unit> GetEnemiesInRange(Unit requester, float range)
 	{
 		List<Unit> enemies = new List<Unit>();

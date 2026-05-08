@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   maxHealth: 130
   mana: 50
-  attackDamage: 15
-  attackSpeed: 0.9
-  moveSpeed: 10
+  attackDamage: 12
+  attackSpeed: 0.8
+  moveSpeed: 8
   treat: 12
   attackRange: 1.5

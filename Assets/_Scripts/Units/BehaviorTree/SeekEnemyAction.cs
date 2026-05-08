@@ -6,14 +6,14 @@ using Unity.Properties;
 using System.Collections.Generic;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "SeekEnemy", story: "Agent Seeks [enemy] at [Speed]", category: "Action", id: "96bd695b356a2bf0b669cd68106282bf")]
+[NodeDescription(name: "SeekEnemy", story: "Agent Seeks enemy at his MoveSpeed", category: "Action", id: "96bd695b356a2bf0b669cd68106282bf")]
 public partial class SeekEnemyAction : Action
 {
-    [SerializeReference] public BlackboardVariable<GameObject> Enemy;
-    [SerializeReference] public BlackboardVariable<float> Speed;
-
     private Unit unit;
     private UnitTargeting targeting;
+    private Animator animator;
+
+    private GameObject Enemy;
 
     protected override Status OnStart()
     {
@@ -28,18 +28,14 @@ public partial class SeekEnemyAction : Action
             ? UnitManager.Instance.GetEnemies(unit)
             : new List<Unit>();
 
-		Debug.Log($"[SeekEnemyAction] Best target found: {(enemies != null ? enemies : "None")}");
-
-		//Unit best = targeting.FindBestTarget(unit, enemies);
 		Unit best = targeting.FindBestTarget(unit, enemies);
-		Debug.Log($"[SeekEnemyAction] Best target found: {(best != null ? best.name : "None")}");
 
 		if (best == null)
             return Status.Failure;
 
-        Enemy.Value = best.gameObject;
+        Enemy = best.gameObject;
 
-        // Se j· est· no range, n„o precisa se mover
+        // Se j√° est√° no range, n√£o precisa se mover
         if (targeting.IsInRange(unit, best))
             return Status.Success;
 
@@ -48,21 +44,22 @@ public partial class SeekEnemyAction : Action
 
     protected override Status OnUpdate()
     {
-        if (unit == null || Enemy.Value == null)
+        if (unit == null || Enemy == null)
             return Status.Failure;
 
-        Unit target = Enemy.Value.GetComponent<Unit>();
-        if (target == null)
+        if (!Enemy.TryGetComponent<Unit>(out var target))
             return Status.Failure;
 
         if (targeting.IsInRange(unit, target))
             return Status.Success;
 
-        // Move em direÁ„o ao inimigo
-        Vector3 direction = (Enemy.Value.transform.position - unit.transform.position).normalized;
-        unit.transform.position += direction * Speed.Value * Time.deltaTime;
+        // Move em dire√ß√£o ao inimigo
+        Vector3 direction = (Enemy.transform.position - unit.transform.position).normalized;
+        unit.transform.position += Time.deltaTime * unit.Stats.moveSpeed * direction;
+		//this.animator.SetBool("isMoving", true);
 
-        return Status.Running;
+
+		return Status.Running;
     }
 
     protected override void OnEnd()
