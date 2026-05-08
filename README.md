@@ -3,7 +3,7 @@
 
 <hr/>
 
-<h2>📌 Informações Gerais</h2>
+<h2><b>Informações Gerais</b></h2>
 
 <p><strong>Título do Jogo:</strong> Memento Mori</p>
 <p><strong>Versão do Documento:</strong> 0.0.1</p>
@@ -12,9 +12,9 @@
 
 <br/>
 
-<h2>🎮 Visão Geral do Projeto</h2>
+<h2><b>Visão Geral do Projeto</b></h2>
 
-<h3>🧠 High Concept</h3>
+<h3><b>High Concept</b></h3>
 
 <p>
 Memento Mori é um jogo <strong>2D de gerenciamento de base com elementos de RTS</strong>,
@@ -24,7 +24,7 @@ para moldar tanto os personagens jogáveis quanto os inimigos.
 
 <br/>
 
-<h2>🌍 Game Overview</h2>
+<h2><b>Game Overview</b></h2>
 
 <p>
 Em um multiverso marcado pela Inquisição, a guerra entre os Templários e os chamados pagãos atingiu um ponto crítico.
@@ -42,7 +42,7 @@ As entidades infernais voltaram-se contra seus aliados, desencadeando a queda da
 
 <br/>
 
-<h3>✝️ Seu Papel</h3>
+<h3><b>Seu Papel</b></h3>
 
 <p>
 Você assume o papel de um <strong>Capelão</strong> — o líder espiritual encarregado de guiar os sobreviventes.
@@ -67,9 +67,9 @@ Sua força não vem apenas de armas ou estratégia, mas da <strong>fé da humani
 
 <br/>
 
-<h2>🏰 Gameplay</h2>
+<h2><b>v</b></h2>
 
-<h3>⚔️ Combate</h3>
+<h3><b>Combate</b></h3>
 
 <p>
 O combate gira em torno de um sistema inspirado em Auto Chess, Legion TD e Teamfight Tactics.
@@ -94,7 +94,7 @@ O combate gira em torno de um sistema inspirado em Auto Chess, Legion TD e Teamf
 
 <br/>
 
-<h3>🛡️ Gerenciamento de Base</h3>
+<h3><b>Gerenciamento de Base</b></h3>
 
 <p>
 Você lidera a <strong>última resistência da humanidade</strong>.
@@ -112,7 +112,7 @@ Você lidera a <strong>última resistência da humanidade</strong>.
 
 <br/>
 
-<h3>🎯 Objetivo</h3>
+<h3><b>Objetivo</b></h3>
 
 <ul>
   <li>Defender sua vila (Tower Defense)</li>
@@ -123,7 +123,7 @@ Você lidera a <strong>última resistência da humanidade</strong>.
 
 <br/>
 
-<h2>🏗️ Estrutura do Jogo</h2>
+<h2><b>Estrutura do Jogo</b></h2>
 
 <table>
   <tr>
@@ -150,7 +150,7 @@ Você lidera a <strong>última resistência da humanidade</strong>.
 
 <br/>
 
-<h2>🕊️ Tema Central</h2>
+<h2><b>Tema Central</b></h2>
 
 <p><em>"A fé é poder — mas também é fragilidade."</em></p>
 
@@ -161,7 +161,7 @@ Cada vitória reacende a esperança.
 
 <br/>
 
-<h2>📖 GDD Completo</h2>
+<h2><b>GDD Completo</b></h2>
 
 <p>
 <a href="https://docs.google.com/document/d/1p_7a0Ordfn_z02y50cGfpy6_TeiLP_Xb62Dh8aZGSgY/edit?usp=sharing" target="_blank">
@@ -171,6 +171,6 @@ Cada vitória reacende a esperança.
 
 <br/>
 
-<h2>🚧 Status do Projeto</h2>
+<h2><b>Status do Projeto</b></h2>
 
 <p><strong>Em desenvolvimento inicial (versão 0.0.1)</strong></p>
