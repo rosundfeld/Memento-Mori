@@ -1,7 +1,6 @@
-using Unity.AppUI.UI;
 using UnityEngine;
 
-public class UnitGrid : MonoBehaviour
+public class UnitGrid
 {
     private int width;
     private int height;
@@ -10,27 +9,47 @@ public class UnitGrid : MonoBehaviour
     private int[,] GridArray;
 
     private TextMesh[,] debugTextArray;
+    private Transform debugParent;
 
-    public UnitGrid(int width, int height, float cellSize, Vector3 originPosition)
+    public UnitGrid(int width, int height, float cellSize, Vector3 originPosition, Transform parent = null)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
         this.originPosition = originPosition;
+        this.debugParent = parent;
         GridArray = new int[width, height];
         debugTextArray = new TextMesh[width, height];
 
+        // Cria os textos de debug
         for (int x = 0; x < GridArray.GetLength(0); x++)
         {
             for (int y = 0; y < GridArray.GetLength(1); y++)
             {
-                debugTextArray[x, y] = CreateWorldText(GridArray[x, y].ToString(), null, GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, 20, Color.white);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
-                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
+                debugTextArray[x, y] = CreateWorldText(
+                    GridArray[x, y].ToString(), 
+                    debugParent, 
+                    GetWorldPosition(x, y) + new Vector3(cellSize, cellSize) * 0.5f, 
+                    20, 
+                    Color.white
+                );
             }
         }
-        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
-        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
+    }
+
+    // Método para desenhar o grid - deve ser chamado de OnDrawGizmos ou Update
+    public void DrawDebug()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white);
+                Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white);
+            }
+        }
+        Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white);
+        Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white);
     }
 
     private TextMesh CreateWorldText(string text, Transform parent, Vector3 localPosition, int fontSize, Color color)
