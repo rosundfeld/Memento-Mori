@@ -16,6 +16,6 @@ MonoBehaviour:
   mana: 50
   attackDamage: 12
   attackSpeed: 0.8
-  moveSpeed: 8
+  moveSpeed: 5
   treat: 12
-  attackRange: 1.5
+  attackRange: 1
