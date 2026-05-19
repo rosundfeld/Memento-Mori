@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 8792125978688386498}
   - component: {fileID: 4333847238268773300}
   - component: {fileID: 885265094311106472}
+  - component: {fileID: 4120511358077421444}
   m_Layer: 0
   m_Name: Goblin Warrior
   m_TagString: Enemy
@@ -380,6 +381,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
+  healthBarFill: {fileID: 858187189907662785}
+  manaBarFill: {fileID: 195827809512957902}
   data: {fileID: 11400000, guid: 3fbd738c202aa8a4ba79b03fda337db3, type: 2}
   stats: {fileID: 11400000, guid: 27ec39681652a1441b39895ff1650ac3, type: 2}
   timeToRetarget: 2
@@ -395,6 +398,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce02761d4ff3c0419cd2f79c03321ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitTargeting
+  threatWeight: 10
+  aggroWeight: 15
+  distanceWeight: 5
+--- !u!114 &4120511358077421444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495871930961605210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4987122287272525979
+  m_OriginalGraph: {fileID: 0}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4987122287272525979
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 7495871930961605210}
 --- !u!1 &7568126034685506637
 GameObject:
   m_ObjectHideFlags: 0

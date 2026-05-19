@@ -12,5 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c76d6b2ae41e049bf84d3de9c8da4a, type: 3}
   m_Name: GoblinArcher
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
-  UnitPrefab: {fileID: 7495871930961605210, guid: ca95b6cf0fdf3014a852453200034d2d, type: 3}
+  UnitPrefab: {fileID: 7203800868858289435, guid: 0c4c7d10f698c6047b253e6572e51280, type: 3}
   baseStats: {fileID: 11400000, guid: e7398520a0f02ee40b4aa4ade17c34c1, type: 2}
+  UnitVisual: {fileID: 0}
+  UnitIcon: {fileID: -489397940863248752, guid: 9f323c7f7c4628b418980c1902723b7f, type: 3}
+  UnitName: Demon Archer
+  Width: 1
+  Height: 1
+  nameString: 
+  prefab: {fileID: 0}
+  visual: {fileID: 0}
+  width: 0
+  height: 0

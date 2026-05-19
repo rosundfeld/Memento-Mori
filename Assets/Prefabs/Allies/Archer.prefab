@@ -187,7 +187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.11, y: 0.97}
+  m_AnchoredPosition: {x: 0.839, y: 1.743}
   m_SizeDelta: {x: 62.5095, y: 43.0229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6018136996325225415
@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 5594752591698041470}
   - component: {fileID: 5703319318350990133}
   - component: {fileID: 6550747776357139040}
+  - component: {fileID: -3740527675500302229}
   - component: {fileID: 9076189966649988622}
   m_Layer: 0
   m_Name: Archer
@@ -538,7 +539,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: -0.0017921925, y: 0.00025599342}
     oldSize: {x: 2, y: 1.75}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -559,8 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  healthBarFill: {fileID: 2723173544494873089}
-  manaBarFill: {fileID: 1392337635048098242}
+  healthBarFill: {fileID: 204955287290078605}
+  manaBarFill: {fileID: 8753673725402008246}
   data: {fileID: 11400000, guid: 2ae34f5f1a7c5844fbcb21b678bf01a2, type: 2}
   stats: {fileID: 11400000, guid: 47df5ee6afb48d943806e13fdb9c0f90, type: 2}
   timeToRetarget: 2
@@ -579,6 +580,18 @@ MonoBehaviour:
   threatWeight: 10
   aggroWeight: 15
   distanceWeight: 2
+--- !u!114 &-3740527675500302229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957775156403184222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6325a09cb63609542b45f608686c56f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacedObject_Done
 --- !u!114 &9076189966649988622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,8 +607,6 @@ MonoBehaviour:
   m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 3570325943442997445
-  - rid: 4987122110022811727
-  - rid: 4987122110022811728
   m_OriginalGraph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -609,20 +620,4 @@ MonoBehaviour:
           m_Value0: 1
           m_Value1: 0
         Name: Self
-        m_Value: {fileID: 0}
-    - rid: 4987122110022811727
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 14297569688583861930
-          m_Value1: 3203135271383545136
-        Name: Speed
-        m_Value: 5
-    - rid: 4987122110022811728
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 13306589953996707524
-          m_Value1: 3129524187020855575
-        Name: Enemy
-        m_Value: {fileID: 0}
+        m_Value: {fileID: 8957775156403184222}

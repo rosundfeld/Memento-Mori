@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Memento-Mori.slnx"
+    "dotnet.defaultSolution": "MementoMori.slnx"
 }

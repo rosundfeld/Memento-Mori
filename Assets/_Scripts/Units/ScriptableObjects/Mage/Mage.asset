@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c76d6b2ae41e049bf84d3de9c8da4a, type: 3}
   m_Name: Mage
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
-  UnitPrefab: {fileID: 1261010032117963399, guid: 924095296da939e4a9d9a7fd8a8f96c9, type: 3}
+  prefab: {fileID: 8202351288693929742, guid: 924095296da939e4a9d9a7fd8a8f96c9, type: 3}
   baseStats: {fileID: 11400000, guid: 073664e18c751dc4883b77d3d9e8a9f1, type: 2}
+  UnitVisual: {fileID: 8202351288693929742, guid: 924095296da939e4a9d9a7fd8a8f96c9, type: 3}
+  UnitIcon: {fileID: 7755096270951353469, guid: 4434843c21e14434285b5d9e3a296cb8, type: 3}
+  UnitName: Cleric
+  width: 1
+  height: 1

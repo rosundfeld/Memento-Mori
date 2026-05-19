@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 9189433109843870655}
   - component: {fileID: 2402970572066191616}
   - component: {fileID: 7452745359792800963}
+  - component: {fileID: 6135459682861967033}
   m_Layer: 0
   m_Name: Goblin Archer
   m_TagString: Enemy
@@ -407,6 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
+  healthBarFill: {fileID: 4902049561252022095}
+  manaBarFill: {fileID: 5240638673563453770}
   data: {fileID: 11400000, guid: 63777e52f1dae7d4cad5ad92490bcee6, type: 2}
   stats: {fileID: 11400000, guid: e7398520a0f02ee40b4aa4ade17c34c1, type: 2}
   timeToRetarget: 2
@@ -422,6 +425,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce02761d4ff3c0419cd2f79c03321ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitTargeting
+  threatWeight: 10
+  aggroWeight: 15
+  distanceWeight: 5
+--- !u!114 &6135459682861967033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203800868858289435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4987122309558173880
+  m_OriginalGraph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4987122309558173880
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 7203800868858289435}
 --- !u!1 &7840303992892638238
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5674713085720123117}
   - component: {fileID: 8416416287500483285}
   - component: {fileID: 6000910897746263872}
+  - component: {fileID: 4404438241266757793}
+  - component: {fileID: 2352708351138286688}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Player
@@ -29,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1261010032117963399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.62, y: 0.78, z: 0}
+  m_LocalPosition: {x: -8.355, y: 1.067, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -132,7 +134,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.0068099974, y: 0.0029868549}
     oldSize: {x: 1.875, y: 2.25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -153,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800cef9cbcf12524fb6b98924ac7419c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
+  healthBarFill: {fileID: 8914829981422302252}
+  manaBarFill: {fileID: 2303639390121461461}
   data: {fileID: 11400000, guid: 4fc5151944f04ff4494bfc14794b2310, type: 2}
   stats: {fileID: 11400000, guid: 073664e18c751dc4883b77d3d9e8a9f1, type: 2}
   timeToRetarget: 2
@@ -168,6 +172,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce02761d4ff3c0419cd2f79c03321ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitTargeting
+  threatWeight: 10
+  aggroWeight: 15
+  distanceWeight: 5
+--- !u!114 &4404438241266757793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261010032117963399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6325a09cb63609542b45f608686c56f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacedObject_Done
+--- !u!114 &2352708351138286688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261010032117963399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4987122377306406992
+  m_OriginalGraph: {fileID: -8007872097765182302, guid: a661a4cf69da14b4d9406726db71ff8b, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4987122377306406992
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 1261010032117963399}
 --- !u!1 &1901915738537509055
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.27, y: 1.11}
+  m_AnchoredPosition: {x: 1.11, y: 2.171}
   m_SizeDelta: {x: 62.5095, y: 43.0229}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &872311852048956687

@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c76d6b2ae41e049bf84d3de9c8da4a, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
-  UnitPrefab: {fileID: 900476883076459718, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
+  prefab: {fileID: 1710194751686579906, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
   baseStats: {fileID: 11400000, guid: 78ce49070ba03064ea05b467ef8cc5c5, type: 2}
+  UnitVisual: {fileID: 1710194751686579906, guid: c9db57c2236ad45478207f4a66ebc225, type: 3}
+  UnitIcon: {fileID: -7832673510111389114, guid: 4434843c21e14434285b5d9e3a296cb8, type: 3}
+  UnitName: Warrior
+  width: 1
+  height: 1

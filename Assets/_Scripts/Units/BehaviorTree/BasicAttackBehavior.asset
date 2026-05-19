@@ -32,8 +32,8 @@ MonoBehaviour:
           rid: 3570325943442997437
         BlackboardGroupReferences: []
         Root:
-          rid: 4987122128474341446
-        m_VersionTimestamp: 639140814230722983
+          rid: 4987122309558173805
+        m_VersionTimestamp: 639144265331814829
     - rid: 3570325943442997437
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -45,7 +45,15 @@ MonoBehaviour:
       data:
         m_Variables:
         - rid: 4987122128474341448
-    - rid: 4987122128474341446
+    - rid: 4987122128474341448
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 4987122309558173805
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -56,10 +64,34 @@ MonoBehaviour:
         m_Parent:
           rid: -2
         m_Child:
-          rid: 4987122128474341447
+          rid: 4987122309558173806
         Repeat: 1
         AllowMultipleRepeatsPerTick: 0
-    - rid: 4987122128474341447
+    - rid: 4987122309558173806
+      type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 12509739129121261655
+          m_Value1: 958433618020681092
+        Graph:
+          rid: 3570325943442997436
+        m_Parent:
+          rid: 4987122309558173805
+        m_Children:
+        - rid: 4987122309558173807
+        - rid: 4987122309558173808
+        m_RegisteredObservers: []
+    - rid: 4987122309558173807
+      type: {class: WaitUntilCombatIsStartedAction, ns: , asm: Assembly-CSharp}
+      data:
+        ID:
+          m_Value0: 12509739129121261655
+          m_Value1: 958433618020681092
+        Graph:
+          rid: 3570325943442997436
+        m_Parent:
+          rid: 4987122309558173806
+    - rid: 4987122309558173808
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -68,20 +100,12 @@ MonoBehaviour:
         Graph:
           rid: 3570325943442997436
         m_Parent:
-          rid: 4987122128474341446
+          rid: 4987122309558173806
         m_Children:
-        - rid: 4987122128474341449
-        - rid: 4987122128474341450
+        - rid: 4987122309558173809
+        - rid: 4987122309558173810
         m_RegisteredObservers: []
-    - rid: 4987122128474341448
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 0}
-    - rid: 4987122128474341449
+    - rid: 4987122309558173809
       type: {class: SeekEnemyAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -90,8 +114,8 @@ MonoBehaviour:
         Graph:
           rid: 3570325943442997436
         m_Parent:
-          rid: 4987122128474341447
-    - rid: 4987122128474341450
+          rid: 4987122309558173808
+    - rid: 4987122309558173810
       type: {class: AttacksUnitInRangeAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -100,7 +124,7 @@ MonoBehaviour:
         Graph:
           rid: 3570325943442997436
         m_Parent:
-          rid: 4987122128474341447
+          rid: 4987122309558173808
 --- !u!114 &-3172354371895847149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +188,8 @@ MonoBehaviour:
   - rid: 3570326004943814739
   - rid: 3570326004943814763
   - rid: 3570326004943814770
-  m_VersionTimestamp: 639140814230722983
+  - rid: 4987122309558173781
+  m_VersionTimestamp: 639144265331814829
   m_SerializedVersion: 2
   m_DebugInfo: {fileID: -3172354371895847149}
   m_RuntimeGraph: {fileID: -8007872097765182302}
@@ -216,6 +241,16 @@ MonoBehaviour:
     Variables: []
     NamedChildren: []
     IsPlaceholder: 0
+  - Name: Wait until combat is started
+    Story: Wait until combat is started
+    RuntimeTypeString: WaitUntilCombatIsStartedAction, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    RuntimeTypeID:
+      m_Value0: 13236193358288187832
+      m_Value1: 2378052010353741521
+    Variables: []
+    NamedChildren: []
+    IsPlaceholder: 0
   m_Blackboards: []
   m_MainBlackboardAuthoringAsset: {fileID: 2172502871305496336}
   m_CommandBuffer:
@@ -230,7 +265,7 @@ MonoBehaviour:
     - rid: 3570325943442997442
       type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
-        Position: {x: 225.87444, y: -291.7993}
+        Position: {x: 146.67441, y: -396.59924}
         ID:
           m_Value0: 3422845049696815580
           m_Value1: 5388578549860344245
@@ -255,11 +290,11 @@ MonoBehaviour:
         m_NodeModel:
           rid: 3570325943442997442
         m_Connections:
-        - rid: 3570326004943814771
+        - rid: 4987122309558173782
     - rid: 3570326004943814739
       type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
-        Position: {x: 58.862843, y: -90.42188}
+        Position: {x: 59.66284, y: -91.221886}
         ID:
           m_Value0: 18010961581465318009
           m_Value1: 16857181747577631020
@@ -333,7 +368,7 @@ MonoBehaviour:
     - rid: 3570326004943814770
       type: {class: CompositeNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
-        Position: {x: 152.7685, y: -190.31085}
+        Position: {x: 146.36847, y: -173.51079}
         ID:
           m_Value0: 2537173072821447597
           m_Value1: 6839410338353778599
@@ -357,7 +392,7 @@ MonoBehaviour:
         m_NodeModel:
           rid: 3570326004943814770
         m_Connections:
-        - rid: 3570325943442997443
+        - rid: 4987122309558173783
     - rid: 3570326004943814772
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -369,6 +404,44 @@ MonoBehaviour:
         m_Connections:
         - rid: 3570326004943814740
         - rid: 3570326004943814764
+    - rid: 4987122309558173781
+      type: {class: ActionNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        Position: {x: 146.71452, y: -265.49942}
+        ID:
+          m_Value0: 12509739129121261655
+          m_Value1: 958433618020681092
+        Parents: []
+        PortModels:
+        - rid: 4987122309558173782
+        - rid: 4987122309558173783
+        NodeType:
+          m_SerializableType: WaitUntilCombatIsStartedAction, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+        NodeTypeID:
+          m_Value0: 13236193358288187832
+          m_Value1: 2378052010353741521
+        m_FieldValues: []
+    - rid: 4987122309558173782
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: InputPort
+        m_PortDataFlowType: 0
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4987122309558173781
+        m_Connections:
+        - rid: 3570325943442997443
+    - rid: 4987122309558173783
+      type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        m_Name: OutputPort
+        m_PortDataFlowType: 1
+        m_IsFloating: 0
+        m_NodeModel:
+          rid: 4987122309558173781
+        m_Connections:
+        - rid: 3570326004943814771
 --- !u!114 &2172502871305496336
 MonoBehaviour:
   m_ObjectHideFlags: 1

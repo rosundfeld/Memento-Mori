@@ -14,3 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   UnitPrefab: {fileID: 7495871930961605210, guid: ca95b6cf0fdf3014a852453200034d2d, type: 3}
   baseStats: {fileID: 11400000, guid: 27ec39681652a1441b39895ff1650ac3, type: 2}
+  UnitVisual: {fileID: 0}
+  UnitIcon: {fileID: -910039603523305761, guid: 507b2ee311a7b1445b678da78c0a28eb, type: 3}
+  UnitName: Demon Warrior
+  Width: 1
+  Height: 1
+  nameString: 
+  prefab: {fileID: 0}
+  visual: {fileID: 0}
+  width: 0
+  height: 0

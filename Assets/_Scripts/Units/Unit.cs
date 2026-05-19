@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour
 
 	[Header("Stats")]
 	[SerializeField]
-	private UnitData data;
+	private UnitDataSO data;
 	[SerializeField]
 	private UnitStats stats;
 	public float CurrentHealth { get; private set; }
@@ -39,6 +39,13 @@ public class Unit : MonoBehaviour
 		UnitManager.Instance.Register(this);
 		if (targeting == null)
 			targeting = GetComponentInChildren<UnitTargeting>(true);
+
+		// Aviso se os componentes de UI não estiverem configurados
+		if (healthBarFill == null)
+			Debug.LogWarning($"[Unit] healthBarFill não está atribuído em {gameObject.name}. A barra de vida não será atualizada.", this);
+		
+		if (manaBarFill == null)
+			Debug.LogWarning($"[Unit] manaBarFill não está atribuído em {gameObject.name}. A barra de mana não será atualizada.", this);
 	}
 
 	private void FixedUpdate()
@@ -68,7 +75,7 @@ public class Unit : MonoBehaviour
 		attackTimer = 0f;
 	}
 
-	/// <summary>Define o alvo atual (usado pelo BT para manter refer�ncia).</summary>
+	/// <summary>Define o alvo atual (usado pelo BT para manter refer�ncia).</summary>
 	public void SetTarget(Unit target)
 	{
 		CurrentTargetEnemy = target;
@@ -81,7 +88,10 @@ public class Unit : MonoBehaviour
 		Debug.Log($"{gameObject.name} took {damage} damage. Current health: {CurrentHealth - damage}/{Stats.maxHealth}");
 		CurrentHealth -= damage;
 		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Stats.maxHealth);
-		healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		
+		if (healthBarFill != null)
+			healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		
 		if (CurrentHealth <= 0) Die();
 	}
 
@@ -89,7 +99,9 @@ public class Unit : MonoBehaviour
 	{
 		CurrentHealth += healAmount;
 		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Stats.maxHealth);
-		healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		
+		if (healthBarFill != null)
+			healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
 	}
 
 	//------------------Action System-----------------
@@ -97,7 +109,10 @@ public class Unit : MonoBehaviour
 	{
 		CurrentHealth -= damage;
 		CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Stats.maxHealth);
-		healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		
+		if (healthBarFill != null)
+			healthBarFill.fillAmount = CurrentHealth / Stats.maxHealth;
+		
 		RegisterAggro(attacker, damage);
 		if (CurrentHealth <= 0) Die();
 	}

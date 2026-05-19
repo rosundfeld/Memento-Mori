@@ -1,70 +1,263 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
+
+using UnityEngine.InputSystem;
 
 public class GridFormationSystem : MonoBehaviour
 {
-    [Header("Grid Settings")]
-    [SerializeField] private int gridWidth = 10;
-    [SerializeField] private int gridHeight = 10;
-    [SerializeField] private float cellSize = 1f;
-    [SerializeField] private Vector3 originPosition = Vector3.zero;
-    [SerializeField] private bool showDebugText = true;
-    [SerializeField] private bool showDebugLines = true;
 
-    private UnitGrid grid;
+    public static GridFormationSystem Instance { get; private set; }
+
+    public event EventHandler OnSelectedChanged;
+    public event EventHandler OnObjectPlaced;
+
+
+    private Grid<GridObject> grid;
+    [SerializeField] private List<UnitDataSO> placedObjectTypeSOList = null;
+    private UnitDataSO placedObjectTypeSO;
+    private UnitDataSO.Dir dir;
+
+    [SerializeField] private int gridWidth;
+    [SerializeField] private int gridHeight;
+    [SerializeField] private float cellSize;
+    [SerializeField] private Vector3 originPosition;
 
     private void Awake()
     {
-        grid = new UnitGrid(gridWidth, gridHeight, cellSize, originPosition, showDebugText ? transform : null);
+        Instance = this;
+
+        int gridWidth = this.gridWidth;
+        int gridHeight = this.gridHeight;
+        float cellSize = this.cellSize;
+        Vector3 originPosition = this.originPosition;
+        grid = new Grid<GridObject>(gridWidth, gridHeight, cellSize, originPosition, (Grid<GridObject> g, int x, int y) => new GridObject(g, x, y));
+
+        placedObjectTypeSO = null;
+    }
+
+    public class GridObject
+    {
+
+        private Grid<GridObject> grid;
+        private int x;
+        private int y;
+        public PlacedObject_Done placedObject;
+
+        public GridObject(Grid<GridObject> grid, int x, int y)
+        {
+            this.grid = grid;
+            this.x = x;
+            this.y = y;
+            placedObject = null;
+        }
+
+        public override string ToString()
+        {
+            return x + ", " + y + "\n" + placedObject;
+        }
+
+        public void SetPlacedObject(PlacedObject_Done placedObject)
+        {
+            this.placedObject = placedObject;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public void ClearPlacedObject()
+        {
+            placedObject = null;
+            grid.TriggerGridObjectChanged(x, y);
+        }
+
+        public PlacedObject_Done GetPlacedObject()
+        {
+            return placedObject;
+        }
+
+        public bool CanBuild()
+        {
+            return placedObject == null;
+        }
+
     }
 
     private void Update()
     {
-        // Desenha as linhas do grid a cada frame para visualização
-        if (showDebugLines && grid != null)
+        if (Mouse.current.leftButton.wasPressedThisFrame && placedObjectTypeSO != null)
         {
-            grid.DrawDebug();
+            if (grid == null)
+            {
+                Debug.LogError("GridFormationSystem: grid is null!");
+                return;
+            }
+
+            Vector3 mousePosition = UtilsClass.GetMouseWorldPosition();
+            grid.GetXY(mousePosition, out int x, out int z);
+
+            // Valida se a posição inicial está dentro do grid
+            if (x < 0 || z < 0 || x >= grid.GetWidth() || z >= grid.GetHeight())
+            {
+                Debug.LogWarning($"GridFormationSystem: Click position ({x}, {z}) is outside grid bounds!");
+                return;
+            }
+
+            Vector2Int placedObjectOrigin = new Vector2Int(x, z);
+
+            // Test Can Build
+            List<Vector2Int> gridPositionList = placedObjectTypeSO.GetGridPositionList(placedObjectOrigin, dir);
+            bool canBuild = true;
+            foreach (Vector2Int gridPosition in gridPositionList)
+            {
+                GridObject gridObject = grid.GetGridObject(gridPosition.x, gridPosition.y);
+                if (gridObject == null)
+                {
+                    Debug.LogWarning($"GridFormationSystem: GridObject is null at position ({gridPosition.x}, {gridPosition.y})");
+                    canBuild = false;
+                    break;
+                }
+
+                if (!gridObject.CanBuild())
+                {
+                    canBuild = false;
+                    break;
+                }
+            }
+
+            if (canBuild)
+            {
+                Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
+                Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, rotationOffset.y) * grid.GetCellSize();
+
+                PlacedObject_Done placedObject = PlacedObject_Done.Create(placedObjectWorldPosition, placedObjectOrigin, dir, placedObjectTypeSO);
+                if (placedObject == null)
+                {
+                    Debug.LogError("GridFormationSystem: Falha ao criar PlacedObject_Done. Verifique logs anteriores.");
+                    return;
+                }
+                placedObject.transform.rotation = Quaternion.Euler(0, 0, -placedObjectTypeSO.GetRotationAngle(dir));
+
+                foreach (Vector2Int gridPosition in gridPositionList)
+                {
+                    grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedObject(placedObject);
+                }
+
+                OnObjectPlaced?.Invoke(this, EventArgs.Empty);
+
+                //DeselectObjectType();
+            }
+            else
+            {
+                // Cannot build here
+                UtilsClass.CreateWorldTextPopup("Cannot Build Here!", mousePosition);
+            }
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            dir = UnitDataSO.GetNextDir(dir);
+        }
+
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); }
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); }
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); }
+        if (Keyboard.current.digit5Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); }
+        if (Keyboard.current.digit6Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); }
+
+        if (Keyboard.current.digit0Key.wasPressedThisFrame) { DeselectObjectType(); }
+
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            Vector3 mousePosition = UtilsClass.GetMouseWorldPosition();
+            PlacedObject_Done placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
+            if (placedObject != null)
+            {
+                // Demolish
+                placedObject.DestroySelf();
+
+                List<Vector2Int> gridPositionList = placedObject.GetGridPositionList();
+                foreach (Vector2Int gridPosition in gridPositionList)
+                {
+                    grid.GetGridObject(gridPosition.x, gridPosition.y).ClearPlacedObject();
+                }
+            }
         }
     }
 
-    private void OnDrawGizmos()
+    private void DeselectObjectType()
     {
-        // Desenha o grid no editor mesmo sem estar em play mode
-        if (grid == null) return;
+        placedObjectTypeSO = null; RefreshSelectedObjectType();
+    }
 
-        Gizmos.color = Color.green;
-        for (int x = 0; x <= gridWidth; x++)
+    private void RefreshSelectedObjectType()
+    {
+        OnSelectedChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+
+    public Vector2Int GetGridPosition(Vector3 worldPosition)
+    {
+        grid.GetXY(worldPosition, out int x, out int z);
+        return new Vector2Int(x, z);
+    }
+
+    public Vector3 GetMouseWorldSnappedPosition()
+    {
+        Vector3 mousePosition = UtilsClass.GetMouseWorldPosition();
+        grid.GetXY(mousePosition, out int x, out int y);
+
+        if (placedObjectTypeSO != null)
         {
-            Vector3 start = originPosition + new Vector3(x * cellSize, 0, 0);
-            Vector3 end = originPosition + new Vector3(x * cellSize, gridHeight * cellSize, 0);
-            Gizmos.DrawLine(start, end);
+            Vector2Int rotationOffset = placedObjectTypeSO.GetRotationOffset(dir);
+            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, y) + new Vector3(rotationOffset.x, rotationOffset.y) * grid.GetCellSize();
+            return placedObjectWorldPosition;
         }
-
-        for (int y = 0; y <= gridHeight; y++)
+        else
         {
-            Vector3 start = originPosition + new Vector3(0, y * cellSize, 0);
-            Vector3 end = originPosition + new Vector3(gridWidth * cellSize, y * cellSize, 0);
-            Gizmos.DrawLine(start, end);
+            return mousePosition;
         }
     }
 
-    // Métodos públicos para interagir com o grid
-    public void SetGridValue(int x, int y, int value)
+    public Quaternion GetPlacedObjectRotation()
     {
-        grid?.SetValue(x, y, value);
+        if (placedObjectTypeSO != null)
+        {
+            return Quaternion.Euler(0, 0, -placedObjectTypeSO.GetRotationAngle(dir));
+        }
+        else
+        {
+            return Quaternion.identity;
+        }
     }
 
-    public void SetGridValue(Vector3 worldPosition, int value)
+    public UnitDataSO GetPlacedObjectTypeSO()
     {
-        grid?.SetValue(worldPosition, value);
+        return placedObjectTypeSO;
     }
 
-    public int GetGridValue(int x, int y)
+    /// <summary>
+    /// Converte posição do mundo para célula do grid (alias para GetGridPosition)
+    /// </summary>
+    public Vector2Int GetCellFromWorldPosition(Vector3 worldPosition)
     {
-        return grid?.GetValue(x, y) ?? -1;
+        return GetGridPosition(worldPosition);
     }
 
-    public int GetGridValue(Vector3 worldPosition)
+    /// <summary>
+    /// Retorna a Unit que está na célula especificada (se houver)
+    /// </summary>
+    public Unit GetUnitAtCell(Vector2Int cell)
     {
-        return grid?.GetValue(worldPosition) ?? -1;
+        if (grid == null) return null;
+
+        GridObject gridObject = grid.GetGridObject(cell.x, cell.y);
+        if (gridObject == null || gridObject.GetPlacedObject() == null) return null;
+
+        // Tenta pegar o componente Unit do PlacedObject
+        return gridObject.GetPlacedObject().GetComponent<Unit>();
     }
+
 }
