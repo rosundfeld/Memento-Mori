@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
+using UnityEngine.EventSystems;
 
 using UnityEngine.InputSystem;
 
@@ -85,6 +86,12 @@ public class GridFormationSystem : MonoBehaviour
 
     private void Update()
     {
+        if (Mouse.current.leftButton.wasPressedThisFrame && IsClickOnTaggedUI())
+        {
+            DeselectObjectType();
+            return;
+        }
+
         if (Mouse.current.leftButton.wasPressedThisFrame && placedObjectTypeSO != null)
         {
             if (grid == null)
@@ -159,12 +166,12 @@ public class GridFormationSystem : MonoBehaviour
             dir = UnitDataSO.GetNextDir(dir);
         }
 
-        if (Keyboard.current.digit1Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[0]; RefreshSelectedObjectType(); }
-        if (Keyboard.current.digit2Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[1]; RefreshSelectedObjectType(); }
-        if (Keyboard.current.digit3Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[2]; RefreshSelectedObjectType(); }
-        if (Keyboard.current.digit4Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[3]; RefreshSelectedObjectType(); }
-        if (Keyboard.current.digit5Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[4]; RefreshSelectedObjectType(); }
-        if (Keyboard.current.digit6Key.wasPressedThisFrame) { placedObjectTypeSO = placedObjectTypeSOList[5]; RefreshSelectedObjectType(); }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame) { SelectObjectTypeByIndex(0); }
+        if (Keyboard.current.digit2Key.wasPressedThisFrame) { SelectObjectTypeByIndex(1); }
+        if (Keyboard.current.digit3Key.wasPressedThisFrame) { SelectObjectTypeByIndex(2); }
+        if (Keyboard.current.digit4Key.wasPressedThisFrame) { SelectObjectTypeByIndex(3); }
+        if (Keyboard.current.digit5Key.wasPressedThisFrame) { SelectObjectTypeByIndex(4); }
+        if (Keyboard.current.digit6Key.wasPressedThisFrame) { SelectObjectTypeByIndex(5); }
 
         if (Keyboard.current.digit0Key.wasPressedThisFrame) { DeselectObjectType(); }
 
@@ -187,14 +194,63 @@ public class GridFormationSystem : MonoBehaviour
         }
     }
 
-    private void DeselectObjectType()
+    public void DeselectObjectType()
     {
         placedObjectTypeSO = null; RefreshSelectedObjectType();
+    }
+
+    public void SelectObjectType(UnitDataSO unitData)
+    {
+        if (unitData == null)
+        {
+            DeselectObjectType();
+            return;
+        }
+
+        placedObjectTypeSO = unitData;
+        RefreshSelectedObjectType();
+    }
+
+    public void SelectObjectTypeByIndex(int index)
+    {
+        if (placedObjectTypeSOList == null || index < 0 || index >= placedObjectTypeSOList.Count)
+        {
+            Debug.LogWarning($"GridFormationSystem: invalid unit index {index}");
+            return;
+        }
+
+        SelectObjectType(placedObjectTypeSOList[index]);
     }
 
     private void RefreshSelectedObjectType()
     {
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private bool IsClickOnTaggedUI()
+    {
+        if (EventSystem.current == null || Mouse.current == null)
+        {
+            return false;
+        }
+
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+
+        foreach (RaycastResult result in raycastResults)
+        {
+            if (result.gameObject != null && result.gameObject.CompareTag("UI"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

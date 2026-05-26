@@ -5,7 +5,9 @@ using UnityEngine;
 public class UnitGhost2D : MonoBehaviour {
 
     private Transform visual;
-    private UnitDataSO placedObjectTypeSO;
+
+    [Header("Ghost Visual")]
+    [SerializeField, Range(0f, 1f)] private float placementOpacity = 0.7f;
 
     private void Start() {
         RefreshVisual();
@@ -13,11 +15,18 @@ public class UnitGhost2D : MonoBehaviour {
         GridFormationSystem.Instance.OnSelectedChanged += Instance_OnSelectedChanged;
     }
 
+    private void OnDestroy() {
+        if (GridFormationSystem.Instance != null) {
+            GridFormationSystem.Instance.OnSelectedChanged -= Instance_OnSelectedChanged;
+        }
+    }
+
     private void Instance_OnSelectedChanged(object sender, System.EventArgs e) {
         RefreshVisual();
     }
 
     private void LateUpdate() {
+        
         Vector3 targetPosition = GridFormationSystem.Instance.GetMouseWorldSnappedPosition();
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
 
@@ -37,6 +46,18 @@ public class UnitGhost2D : MonoBehaviour {
             visual.parent = transform;
             visual.localPosition = Vector3.zero;
             visual.localEulerAngles = Vector3.zero;
+
+            ApplyVisualOpacity(visual);
+        }
+    }
+
+    private void ApplyVisualOpacity(Transform visualRoot) {
+        SpriteRenderer[] spriteRenderers = visualRoot.GetComponentsInChildren<SpriteRenderer>(true);
+
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers) {
+            Color color = spriteRenderer.color;
+            color.a = placementOpacity;
+            spriteRenderer.color = color;
         }
     }
 

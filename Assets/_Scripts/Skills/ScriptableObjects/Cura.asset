@@ -15,8 +15,8 @@ MonoBehaviour:
   skillName: Cura
   description: "Descri\xE7\xE3o da skill"
   icon: {fileID: 6050907713851601343, guid: 4eff7268d058843458f0b0c8528f3a21, type: 3}
-  faithCost: 20
+  faithCost: 0
   cooldown: 14
   targetRange: 5
   requiresCombat: 1
-  effect: {fileID: 11400000, guid: fad4a82f9f3a9d448a5fc630adcfbfd2, type: 2}
+  effect: {fileID: 0}

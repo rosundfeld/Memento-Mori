@@ -36,6 +36,11 @@ public class CombatManager : MonoBehaviour
 
     public void StartCombat()
     {
+        if (GridFormationSystem.Instance != null)
+        {
+            GridFormationSystem.Instance.DeselectObjectType();
+        }
+
         IsCombatActive = true;
         Debug.Log("Combat started! Units can now attack.");
     }
