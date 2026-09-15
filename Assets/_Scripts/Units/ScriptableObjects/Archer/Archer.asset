@@ -15,7 +15,7 @@ MonoBehaviour:
   prefab: {fileID: 2059965939098071986, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
   baseStats: {fileID: 11400000, guid: 47df5ee6afb48d943806e13fdb9c0f90, type: 2}
   UnitVisual: {fileID: 2059965939098071986, guid: 9ec90df13cff75f4285c157a1ebd65f1, type: 3}
-  UnitIcon: {fileID: 5241229139606169811, guid: bee5b0cc7511b974c90b94aa44352c0b, type: 3}
+  UnitIcon: {fileID: 1547295944305074330, guid: 2db59a9329b556e4cbc050f4e8b5a4f4, type: 3}
   UnitName: Archer
   width: 1
   height: 1

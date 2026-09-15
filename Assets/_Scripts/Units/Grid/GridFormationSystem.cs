@@ -179,6 +179,11 @@ public class GridFormationSystem : MonoBehaviour
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             Vector3 mousePosition = UtilsClass.GetMouseWorldPosition();
+            if(grid.GetGridObject(mousePosition) == null)
+            {
+                Debug.LogWarning($"GridFormationSystem: GridObject is null at mouse position ({mousePosition.x}, {mousePosition.y})");
+                return;
+            }
             PlacedObject_Done placedObject = grid.GetGridObject(mousePosition).GetPlacedObject();
             if (placedObject != null)
             {
@@ -197,6 +202,67 @@ public class GridFormationSystem : MonoBehaviour
     public void DeselectObjectType()
     {
         placedObjectTypeSO = null; RefreshSelectedObjectType();
+    }
+
+    /// <summary>
+    /// Remove todas as unidades colocadas no grid
+    /// </summary>
+    public void ClearAllPlacedUnits()
+    {
+        if (grid == null)
+        {
+            Debug.LogWarning("GridFormationSystem: grid is null, cannot clear units.");
+            return;
+        }
+
+        int unitsRemoved = 0;
+        List<PlacedObject_Done> objectsToDestroy = new List<PlacedObject_Done>();
+
+        // Percorre todas as células do grid
+        for (int x = 0; x < grid.GetWidth(); x++)
+        {
+            for (int y = 0; y < grid.GetHeight(); y++)
+            {
+                GridObject gridObject = grid.GetGridObject(x, y);
+                if (gridObject != null && gridObject.GetPlacedObject() != null)
+                {
+                    PlacedObject_Done placedObject = gridObject.GetPlacedObject();
+                    
+                    // Adiciona à lista se ainda não estiver (evita duplicatas de objetos multi-célula)
+                    if (!objectsToDestroy.Contains(placedObject))
+                    {
+                        objectsToDestroy.Add(placedObject);
+                        unitsRemoved++;
+                    }
+                }
+            }
+        }
+
+        // Destrói todos os objetos coletados
+        foreach (PlacedObject_Done placedObject in objectsToDestroy)
+        {
+            if (placedObject != null)
+            {
+                // Limpa as células ocupadas por este objeto
+                List<Vector2Int> gridPositionList = placedObject.GetGridPositionList();
+                foreach (Vector2Int gridPosition in gridPositionList)
+                {
+                    GridObject gridObj = grid.GetGridObject(gridPosition.x, gridPosition.y);
+                    if (gridObj != null)
+                    {
+                        gridObj.ClearPlacedObject();
+                    }
+                }
+
+                // Destrói o objeto
+                placedObject.DestroySelf();
+            }
+        }
+
+        Debug.Log($"GridFormationSystem: Removed {unitsRemoved} units from grid.");
+        
+        // Desseleciona qualquer tipo de unidade ativa
+        DeselectObjectType();
     }
 
     public void SelectObjectType(UnitDataSO unitData)
@@ -314,6 +380,44 @@ public class GridFormationSystem : MonoBehaviour
 
         // Tenta pegar o componente Unit do PlacedObject
         return gridObject.GetPlacedObject().GetComponent<Unit>();
+    }
+
+    /// <summary>
+    /// Retorna informações do grid para sistemas visuais
+    /// </summary>
+    public GridInfo GetGridInfo()
+    {
+        if (grid == null)
+        {
+            return new GridInfo { width = gridWidth, height = gridHeight, cellSize = cellSize, originPosition = originPosition };
+        }
+
+        return new GridInfo
+        {
+            width = grid.GetWidth(),
+            height = grid.GetHeight(),
+            cellSize = grid.GetCellSize(),
+            originPosition = originPosition
+        };
+    }
+
+    /// <summary>
+    /// Obtém a posição no mundo de uma célula específica
+    /// </summary>
+    public Vector3 GetCellWorldPosition(int x, int y)
+    {
+        return grid != null ? grid.GetWorldPosition(x, y) : Vector3.zero;
+    }
+
+    /// <summary>
+    /// Struct para retornar informações do grid
+    /// </summary>
+    public struct GridInfo
+    {
+        public int width;
+        public int height;
+        public float cellSize;
+        public Vector3 originPosition;
     }
 
 }
